@@ -27,8 +27,8 @@ public class MainMenu extends JFrame implements ActionListener {
     menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     JPanel menuPanel = new JPanel();
-    menuPanel.setBackground(Color.White);
-    menuPanel.setSize(MENU_FRAME_SIZE, MENU_FRAME_SIZE);
+    menuPanel.setBackground(Color.WHITE);
+    menuPanel.setPreferredSize(new Dimension(MENU_FRAME_SIZE, MENU_FRAME_SIZE));
     menuPanel.setLayout(new GridBagLayout ());
 
     JLabel menuTitle = new JLabel("Welcome to Amaze: Version " + AMAZE_VERSION);
@@ -92,13 +92,20 @@ public class MainMenu extends JFrame implements ActionListener {
   }
 
 
-
-
   /**
    * @param e ActionEvent used to determine which button was pressed
    * @time unspecified
    */
   @Override
   public void actionPerformed (ActionEvent e) {
+    if (e.getSource() == playButton) {
+      System.out.println("Beginning game");
+    }
+    else if (e.getSource() == instructionsButton) {
+      System.out.println("Instructions game");
+    }
+    else if (e.getSource() == exitButton) {
+      System.out.println("Leaving game: ");
+    }
   }
 }
