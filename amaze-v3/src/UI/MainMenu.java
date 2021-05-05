@@ -7,13 +7,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenu extends JFrame implements ActionListener {
-  private final int AMAZE_VERSION = 3;
+  private final double AMAZE_VERSION = 3.0;
   private JFrame menuFrame;
   private JFrame modeFrame;
 
   private JButton playButton;
   private JButton instructionsButton;
   private JButton exitButton;
+
+  private JButton easyModeButton;
+  private JButton mediumModeButton;
+  private JButton hardModeButton;
 
   public MainMenu () {
     drawMenu();
@@ -123,7 +127,7 @@ public class MainMenu extends JFrame implements ActionListener {
   }
 
   private void drawInstructionsMenu () {
-    final int frameSize = 650;
+    final int FRAME_SIZE = 650;
     final String [] INSTRUCTIONS = {
       "Welcome to AMAZE!",
       "-> You will be spawned in at a map.",
@@ -143,7 +147,7 @@ public class MainMenu extends JFrame implements ActionListener {
 
     JPanel instructions_panel = new JPanel(null);
     instructions_panel.setBackground(Color.WHITE);
-    instructions_panel.setPreferredSize(new Dimension(frameSize, frameSize));
+    instructions_panel.setPreferredSize(new Dimension(FRAME_SIZE, FRAME_SIZE));
     instructions_panel.setLayout(new GridBagLayout());
 
     GridBagConstraints gbc = new GridBagConstraints();
@@ -166,6 +170,47 @@ public class MainMenu extends JFrame implements ActionListener {
     instructions_frame.add(instructions_panel);
     instructions_frame.pack();
     instructions_frame.setVisible(true);
+  }
+
+  private void drawModesMenu () {
+    final int MODES_WIDTH = 400;
+    final int MODES_HEIGHT = 100;
+    final int BUTTON_WIDTH = 150;
+    final int BUTTON_HEIGHT = 50;
+
+    modeFrame = new JFrame ("AMAZE | Select your gamemode");
+    modeFrame.setDefaultCloseOperation(HIDE_ON_CLOSE);
+    modeFrame.setSize(MODES_WIDTH, MODES_HEIGHT);
+    modeFrame.setLocationRelativeTo(null);
+    modeFrame.setBackground(Color.WHITE);
+    modeFrame.setResizable(false);
+
+    JPanel modePanel = new JPanel();
+    modePanel.setLayout(new GridBagLayout());
+    modePanel.setPreferredSize(new Dimension(MODES_WIDTH, MODES_HEIGHT));
+    modePanel.setBackground(Color.WHITE);
+
+    GridBagConstraints gbc = new GridBagConstraints();
+
+    easyModeButton = new JButton ("Easy Mode");
+    easyModeButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+    easyModeButton.setBackground(Color.WHITE);
+    easyModeButton.setForeground(Color.BLACK);
+    easyModeButton.setBorderPainted(false);
+    easyModeButton.setContentAreaFilled(false);
+    easyModeButton.setFont(new Font("Arial", Font.BOLD, 15));
+    gbc.gridx = 0; gbc.gridy = 1;
+    gbc.gridwidth = 1; gbc.gridheight = 1;
+    modePanel.add(easyModeButton, gbc);
+
+    JLabel easyDesc = new JLabel(": Dimensions are small");
+    easyDesc.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+    easyDesc.setBackground(Color.WHITE);
+    easyDesc.setForeground(Color.BLACK);
+    easyDesc.setFont(new Font("Arial", Font.BOLD, 15));
+    gbc.gridx = 1; gbc.gridy = 1;
+    gbc.gridwidth = 2; gbc.gridheight = 1;
+    modePanel.add(easyDesc, gbc);
   }
 
 
