@@ -1,6 +1,7 @@
 package UI;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,14 +51,14 @@ public class MainMenu extends JFrame implements ActionListener {
     JLabel devBy = new JLabel("A game developed by: " );
     devBy.setSize(400, 100);
     devBy.setForeground(Color.BLACK);
-    devBy.setFont(new Font("Arial", Font.BOLD, 15));
+    devBy.setFont(new Font("Arial", Font.BOLD, 20));
     devBy.setLocation(200, 200); // need to change this to layout way
     devBy.setVisible(true);
 
     JLabel devs = new JLabel(DEV_RAPOPPORT + " and " + DEV_NIRAULA);
     devs.setSize(400, 100);
     devs.setForeground(Color.BLACK);
-    devs.setFont(new Font("Arial", Font.ROMAN_BASELINE, 20));
+    devs.setFont(new Font("Arial", Font.ROMAN_BASELINE, 25));
     devs.setLocation(300, 300); // NEED TO CHANGE THIS AGAIN;
     devs.setVisible(true);
 
@@ -107,13 +108,14 @@ public class MainMenu extends JFrame implements ActionListener {
     menuPanel.add(exitButton, gbc);
 
     gbc.gridx = 2; gbc.gridy = 5;
-    menuPanel.add(devs, gbc);
+    gbc.gridwidth = 2; gbc.gridheight = 1;
+    gbc.fill = GridBagConstraints.BELOW_BASELINE;
+    gbc.insets = new Insets(10, 10, 10, 10);
+    menuPanel.add(devBy, gbc);
 
     gbc.gridx = 2; gbc.gridy = 6;
     gbc.gridwidth = 2; gbc.gridheight = 1;
-    menuPanel.add(devBy, gbc);
-    
-
+    menuPanel.add(devs, gbc);
 
     menuFrame.add(menuPanel);
     menuFrame.pack();
@@ -121,6 +123,49 @@ public class MainMenu extends JFrame implements ActionListener {
   }
 
   private void drawInstructionsMenu () {
+    final int frameSize = 650;
+    final String [] INSTRUCTIONS = {
+      "Welcome to AMAZE!",
+      "-> You will be spawned in at a map.",
+      "-> Your goal is to reach the end of the map. Find the endpoint",
+      "-> Failure to do so will result in your loss",
+      "-> Use W A S D to move your player. Reach the end point. ",
+      "-> Good luck!"
+    };
+
+    JFrame instructions_frame = new JFrame("Instructions Window");
+    instructions_frame.setDefaultCloseOperation(HIDE_ON_CLOSE);
+    instructions_frame.setSize(400, 100);
+    instructions_frame.setBackground(Color.WHITE);
+    instructions_frame.setLocationRelativeTo(null);
+    instructions_frame.setVisible(true);
+    instructions_frame.setResizable(false);
+
+    JPanel instructions_panel = new JPanel(null);
+    instructions_panel.setBackground(Color.WHITE);
+    instructions_panel.setPreferredSize(new Dimension(frameSize, frameSize));
+    instructions_panel.setLayout(new GridBagLayout());
+
+    GridBagConstraints gbc = new GridBagConstraints();
+
+    for (int i = 0; i < INSTRUCTIONS.length; i += 1) {
+      JLabel label = new JLabel(INSTRUCTIONS[i]);
+      label.setForeground(Color.BLACK);
+      label.setSize(400, 100);
+      label.setFont(new Font("Arial", Font.PLAIN, 20));
+
+      gbc.gridx = 0; gbc.gridy = i;
+      gbc.gridwidth = 2; gbc.gridheight = 1;
+      gbc.fill = GridBagConstraints.HORIZONTAL;
+      gbc.insets = new Insets(10, 5, 10, 5);
+
+      label.setVisible(true);
+      instructions_panel.add(label, gbc);
+    }
+
+    instructions_frame.add(instructions_panel);
+    instructions_frame.pack();
+    instructions_frame.setVisible(true);
   }
 
 
